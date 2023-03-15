@@ -1,0 +1,29 @@
+import Adafruit_GPIO.SPI as SPI
+import Adafruit_MCP3008
+import time
+
+def display_gas_sensor_data():
+    # Hardware SPI configuration for first ADC:
+    SPI_PORT_1   = 0
+    SPI_DEVICE_1 = 0
+    mcp_1 = Adafruit_MCP3008.MCP3008(spi=SPI.SpiDev(SPI_PORT_1, SPI_DEVICE_1))
+
+    # Hardware SPI configuration for second ADC:
+    SPI_PORT_2   = 0
+    SPI_DEVICE_2 = 1
+    mcp_2 = Adafruit_MCP3008.MCP3008(spi=SPI.SpiDev(SPI_PORT_2, SPI_DEVICE_2))
+
+    # Number of channels
+    num_channels = 8
+
+    # Gas sensor labels
+    gas_labels = ["Sensor 1", "Sensor 2", "Sensor 3", "Sensor 4", "Sensor 5", "Sensor 6", "Sensor 7", "Sensor 8"]
+
+    # Infinite loop to continuously read and display data
+    while True:
+        for i in range(num_channels // 2):
+            channel_value_1 = mcp_1.read_adc(i)
+            channel_value_2 = mcp_2.read_adc(i)
+            print("{}: {}".format(gas_labels[i], channel_value_1))
+            print("{}: {}".format(gas_labels[i + num_channels // 2], channel_value_2))
+        time.sleep(1)
