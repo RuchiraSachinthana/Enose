@@ -1,0 +1,43 @@
+import RPi.GPIO as GPIO
+import time
+
+# Set the GPIO mode
+GPIO.setmode(GPIO.BCM)
+
+# Set the pins for the relays
+relay1_pin = 17
+relay2_pin = 18
+
+# Set the pins as output
+GPIO.setup(relay1_pin, GPIO.OUT)
+GPIO.setup(relay2_pin, GPIO.OUT)
+
+# Define a function to turn off the relays and clean up the GPIO pins
+def SystemClean():
+    GPIO.output(relay1_pin, GPIO.LOW)
+    GPIO.output(relay2_pin, GPIO.LOW)
+    GPIO.cleanup()
+
+# Define a function to control the relays and get data from a sensor
+def getData():
+    # Turn on relay 1
+    GPIO.output(relay1_pin, GPIO.HIGH)
+    time.sleep(2)
+    # Read data from sensor
+    # ...
+    # Turn off relay 1
+    GPIO.output(relay1_pin, GPIO.LOW)
+
+    # Turn on relay 2
+    GPIO.output(relay2_pin, GPIO.HIGH)
+    time.sleep(2)
+    # Read data from sensor
+    # ...
+    # Turn off relay 2
+    GPIO.output(relay2_pin, GPIO.LOW)
+
+# Call the getData function to control the relays and get data
+getData()
+
+# Call the SystemClean function to turn off the relays and clean up the GPIO pins
+SystemClean()
