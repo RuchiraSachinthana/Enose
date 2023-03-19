@@ -1,0 +1,21 @@
+import csv
+
+# create some example data
+data = [
+    ['MQ7', 'MQ9', 'MQ135'],
+    ['123', 132, '234'],
+    
+]
+
+# define the name and path of the CSV file
+filename = 'example.csv'
+
+# open the file in write mode and create a CSV writer object
+with open(filename, 'w', newline='') as file:
+    writer = csv.writer(file)
+
+    # write the data to the CSV file
+    for row in data:
+        writer.writerow(row)
+
+print('Data written to CSV file successfully!')
