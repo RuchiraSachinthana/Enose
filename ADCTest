@@ -1,0 +1,21 @@
+import time
+import board
+import busio
+import adafruit_ads1x15.ads1115 as ADS
+from adafruit_ads1x15.analog_in import AnalogIn
+
+# Create I2C bus
+i2c = busio.I2C(board.SCL, board.SDA)
+
+# Create ADC instances
+ads1 = ADS.ADS1115(i2c, address=0x48)
+ads2 = ADS.ADS1115(i2c, address=0x49)
+
+# Create analog input channels
+chan1 = AnalogIn(ads1, ADS.P0)
+chan2 = AnalogIn(ads2, ADS.P0)
+
+# Print readings every second
+while True:
+    print("ADC 1: {:.3f}V | ADC 2: {:.3f}V".format(chan1.voltage, chan2.voltage))
+    time.sleep(1)
