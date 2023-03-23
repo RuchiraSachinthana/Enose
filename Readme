@@ -1,0 +1,25 @@
+With the voltage readings from two ADS1115 ADC modules:
+
+Gather the required components:
+Raspberry Pi 4
+Two ADS1115 ADC modules
+DHT11 temperature and humidity sensor
+Male-to-female jumper wires
+Breadboard (optional)
+Connect the components to the Raspberry Pi as follows:
+Connect the VDD pin on each ADS1115 module to the 3.3V pin on the Raspberry Pi.
+Connect the GND pin on each ADS1115 module to a ground pin on the Raspberry Pi.
+Connect the SCL pin on each ADS1115 module to a GPIO pin on the Raspberry Pi (e.g. GPIO3).
+Connect the SDA pin on each ADS1115 module to a GPIO pin on the Raspberry Pi (e.g. GPIO2).
+Connect the data pin on the DHT11 sensor to a GPIO pin on the Raspberry Pi (e.g. GPIO4).
+Connect the VCC pin on the DHT11 sensor to the 3.3V pin on the Raspberry Pi.
+Connect the GND pin on the DHT11 sensor to a ground pin on the Raspberry Pi.
+Note: If you're using a breadboard, you can connect the jumper wires to the components on the breadboard.
+
+Enable I2C on the Raspberry Pi:
+Open the terminal and type the following command: sudo raspi-config
+Select "Interfacing Options" from the menu.
+Select "I2C" and choose "Yes" to enable the I2C interface.
+Reboot the Raspberry Pi.
+Install the necessary libraries:
+Open the terminal and type the following commands:
