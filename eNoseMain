@@ -1,0 +1,55 @@
+import time
+import datetime
+import board
+import busio
+import adafruit_ads1x15.ads1115 as ADS
+from adafruit_ads1x15.analog_in import AnalogIn
+import adafruit_dht
+
+# Create I2C bus
+i2c = busio.I2C(board.SCL, board.SDA)
+
+# Create ADS1115 instances
+ads1 = ADS.ADS1115(i2c, address=0x48)
+ads2 = ADS.ADS1115(i2c, address=0x49)
+
+# Create AnalogIn channels for all 8 inputs
+mq1 = AnalogIn(ads1, ADS.P0)
+mq2 = AnalogIn(ads1, ADS.P1)
+mq3 = AnalogIn(ads1, ADS.P2)
+mq4 = AnalogIn(ads1, ADS.P3)
+mq5 = AnalogIn(ads2, ADS.P0)
+mq6 = AnalogIn(ads2, ADS.P1)
+mq7 = AnalogIn(ads2, ADS.P2)
+mq8 = AnalogIn(ads2, ADS.P3)
+
+# Create DHT11 instance
+dht = adafruit_dht.DHT11(board.GPIO4)
+
+# Print readings every second
+while True:
+    try:
+        # Read temperature and humidity from DHT11
+        temperature = dht.temperature
+        humidity = dht.humidity
+    except:
+        print("Failed to read DHT11 data.")
+        temperature = 0
+        humidity = 0
+    
+    # Read voltage from ADC channels
+    mq1_voltage = mq1.voltage
+    mq2_voltage = mq2.voltage
+    mq3_voltage = mq3.voltage
+    mq4_voltage = mq4.voltage
+    mq5_voltage = mq5.voltage
+    mq6_voltage = mq6.voltage
+    mq7_voltage = mq7.voltage
+    mq8_voltage = mq8.voltage
+    
+    # Get current date and time
+    current_time = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    
+    # Print readings with date and time
+    print("{} | MQ1: {:.3f}V | MQ2: {:.3f}V | MQ3: {:.3f}V | MQ4: {:.3f}V | MQ5: {:.3f}V | MQ6: {:.3f}V | MQ7: {:.3f}V | MQ8: {:.3f}V | Temperature: {:.1f}°C | Humidity: {}%".format(current_time, mq1_voltage, mq2_voltage, mq3_voltage, mq4_voltage, mq5_voltage, mq6_voltage, mq7_voltage, mq8_voltage, temperature, humidity))
+    time.sleep(1)
