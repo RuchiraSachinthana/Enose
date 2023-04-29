@@ -1,0 +1,45 @@
+import numpy as np
+import pandas as pd
+from matplotlib import pyplot as plt
+
+import matplotlib.pyplot as plt
+import plotly.express as px
+import plotly.graph_objects as go
+
+df = pd.read_csv('enosedata_1.csv',
+                 sep='[:, |_]',
+                 engine='python')
+ 
+# Print the Dataframe
+df
+MQ2 = df['MQ2']
+MQ2
+MQ135 = df['MQ135']
+MQ135
+Time = df['Time']
+Time
+MQ7 = df['MQ7']
+MQ7
+Date = df['Date']
+Date
+Temperature = df['Temperature']
+Temperature
+Humidity = df['Humidity']
+Humidity
+
+
+fig = plt.figure()
+
+myaxes = fig.add_axes([0.1,0.1,1.6,1.6])
+
+
+
+myaxes.plot(Time,MQ2,'r',lw=3,label = 'MQ2')
+myaxes.plot(Time,MQ135,'b',lw=3,label = 'MQ135')
+myaxes.plot(Time,MQ7,'g',lw=3,label = 'MQ7')
+myaxes.plot(Time,Humidity,'black',lw=5,label = 'Humidity')
+myaxes.plot(Time,Temperature,'y',lw=3,label = 'Temperature')
+myaxes.set_xlabel('Time')
+myaxes.set_ylabel('Sensors readings')
+myaxes.set_title('Sample Data')
+myaxes.legend()
