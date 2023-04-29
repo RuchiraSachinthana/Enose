@@ -69,7 +69,7 @@ def start_process():
         #file.write("Date,Time,MQ2,MQ7,MQ135,MQ3,Temperature,Humidity, Label, Radius, Lenth") # Headers for CSV File
         file.write(datetime.today().strftime('%Y-%m-%d'+"," '%H:%M:%S'))
         #file.write("{0:>6},{1:>6},{2:>6}".format(*values)+",{0:0.2f}".format(temperature)+" "+",{0:0.2f}".format(humidity)+"\n" )
-        file.write("{0:>6},{1:>6},{2:>6}, {3:>6}".format(*values)+ " " + ",{0:0.2f}".format(temperature)+" "+",{0:0.2f}".format(humidity) + " " + ",{0}".format(label)  + " " + ",{0}".format(fradius) + " " + ",{0}".format(flenth) + "\n" )
+        file.write(",{0:>6},{1:>6},{2:>6}, {3:>6}".format(*values)+ " " + ",{0:0.2f}".format(temperature)+" "+",{0:0.2f}".format(humidity) + " " + ",{0}".format(label)  + " " + ",{0}".format(fradius) + " " + ",{0}".format(flenth) + "\n" )
         #file.write("{0}".format(label) + ", {0:>6},{1:>6},{2:>6}, {3:6}".format(*values)+",{0:0.2f}".format(temperature)+" "+",{0:0.2f}".format(humidity)+"\n" )
         file.close()
     
