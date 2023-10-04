@@ -1,0 +1,31 @@
+import numpy as np
+import pickle
+
+
+file_name = 'gihani.pkl'
+
+#Load
+model_loaded = pickle.load(open(file_name,'rb'))
+
+
+# Load the SVM model from the .pkl file
+# with open('gihani.pkl', 'rb') as file:
+#     svm_model = pickle.load(file)
+
+
+# age = input('what is your age:- ')
+# weight = input('input your weight in KG:-')
+# height = input('input your height in inches:-')
+
+# print(float(weight))
+
+#another prediction
+input_data = [13575,12263,4680,4983,26,57,16,34]
+input_data_as_numpyArray = np.asarray([input_data])
+
+# input_data_reshaped = input_data_as_numpyArray.reshape(1,-1)
+# print(input_data_as_numpyArray)
+
+prediction = model_loaded.predict(input_data_as_numpyArray)
+# print(np.round(prediction,0))
+print(prediction)
